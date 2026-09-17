@@ -1,5 +1,3 @@
-<!-- resources/views/auth/auth.blade.php -->
-<!-- Halaman Sign In / Sign Up dengan panel overlay yang geser + tukar warna -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -85,7 +83,6 @@
             transform: translateX(0);
         }
 
-        /* Saat mode Sign Up aktif */
         .auth-container.right-panel-active .sign-in-panel {
             transform: translateX(100%);
             opacity: 0;
@@ -123,22 +120,8 @@
         <div class="form-panel sign-up-panel">
             <form action="{{ route('register') ?? '#' }}" method="POST"
                   class="h-full flex flex-col items-center justify-center px-10">
-                @csrf
+                
                 <h1 class="text-2xl font-bold text-gray-800 mb-4">Buat Akun</h1>
-
-                <div class="flex gap-3 mb-4">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
-                        <i class="fa-brands fa-google-plus-g"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                </div>
-
-                <span class="text-xs text-gray-500 mb-3">atau daftar pakai email</span>
 
                 <input type="text" name="name" placeholder="Nama Lengkap"
                        class="w-full bg-gray-100 border-0 rounded-lg px-4 py-3 mb-3 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
@@ -151,16 +134,10 @@
                         class="bg-[#076653] hover:bg-[#054d3f] text-white text-sm font-semibold uppercase tracking-wide px-10 py-3 rounded-lg transition">
                     Sign Up
                 </button>
-            </form>
-        </div>
 
-        <div class="form-panel sign-in-panel">
-            <form action="{{ route('login') ?? '#' }}" method="POST"
-                  class="h-full flex flex-col items-center justify-center px-10">
-                @csrf
-                <h1 class="text-2xl font-bold text-gray-800 mb-4">Sign In</h1>
+                <span class="text-xs text-gray-500 mt-4 mb-3">atau daftar pakai email</span>
 
-                <div class="flex gap-3 mb-4">
+                <div class="flex gap-3">
                     <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
                         <i class="fa-brands fa-google-plus-g"></i>
                     </a>
@@ -171,8 +148,14 @@
                         <i class="fa-brands fa-linkedin-in"></i>
                     </a>
                 </div>
+            </form>
+        </div>
 
-                <span class="text-xs text-gray-500 mb-3">atau pakai email & password</span>
+        <div class="form-panel sign-in-panel">
+            <form action="{{ route('login') ?? '#' }}" method="POST"
+                  class="h-full flex flex-col items-center justify-center px-10">
+
+                <h1 class="text-2xl font-bold text-gray-800 mb-4">Sign In</h1>
 
                 <input type="email" name="email" placeholder="Email"
                        class="w-full bg-gray-100 border-0 rounded-lg px-4 py-3 mb-3 text-sm focus:ring-2 focus:ring-emerald-600 outline-none">
@@ -185,6 +168,20 @@
                         class="bg-[#076653] hover:bg-[#054d3f] text-white text-sm font-semibold uppercase tracking-wide px-10 py-3 rounded-lg transition">
                     Sign In
                 </button>
+
+                <span class="text-xs text-gray-500 mt-4 mb-3">atau pakai email & password</span>
+
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
+                        <i class="fa-brands fa-google-plus-g"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </div>
             </form>
         </div>
 
