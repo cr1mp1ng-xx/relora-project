@@ -219,7 +219,7 @@
                     <input name="password" type="password" placeholder="Password" autocomplete="current-password" class="input-field w-full text-base text-slate-700 px-5 py-4 rounded-xl">
 
                     <div class="text-center">
-                        <a href="Pass.php" class="text-sm text-slate-500 link-brand">Lupa Password?</a>
+                        <a href="lupass.php" class="text-sm text-slate-500 link-brand">Lupa Password?</a>
                     </div>
 
                     <p id="msg-signin" class="msg" hidden></p>
@@ -239,11 +239,6 @@
                     <button type="button" aria-label="Facebook" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
                             <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.16 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.78 8.44-4.93 8.44-9.94z" />
-                        </svg>
-                    </button>
-                    <button type="button" aria-label="LinkedIn" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
-                            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z" />
                         </svg>
                     </button>
                 </div>

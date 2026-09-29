@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Lupa Password - Relora</title>
+    <title>Password Baru - Relora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -75,12 +74,10 @@
         }
 
         @keyframes bob {
-
             0%,
             100% {
                 transform: translateY(0) rotate(var(--r, 0deg));
             }
-
             50% {
                 transform: translateY(-14px) rotate(var(--r, 0deg));
             }
@@ -130,7 +127,6 @@
                 opacity: 0;
                 transform: translateY(8px);
             }
-
             to {
                 opacity: 1;
                 transform: none;
@@ -160,7 +156,6 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-
             .float-icon,
             .view {
                 animation: none;
@@ -215,26 +210,24 @@
     <div class="relative z-10 w-full max-w-[1100px] flex flex-col md:flex-row bg-white rounded-[32px] overflow-hidden card-shadow">
         <div class="w-full md:w-1/2 px-8 sm:px-16 py-14 flex flex-col justify-center">
             <section class="view">
-                <h1 class="text-3xl font-bold text-slate-800 text-center mb-3">Lupa Password?</h1>
+                <h1 class="text-3xl font-bold text-slate-800 text-center mb-3">Password Baru</h1>
                 <p class="text-center text-sm text-slate-500 mb-8 max-w-[340px] mx-auto">
-                    Masukkan email yang kamu pakai untuk mendaftar. Kami akan kirim link untuk membuat password baru.
+                    Buat password baru untuk akun Relora kamu.
                 </p>
 
-                <form id="form-forgot" class="space-y-5" novalidate>
-                    <input name="email" type="email" placeholder="Email" autocomplete="email" class="input-field w-full text-base text-slate-700 px-5 py-4 rounded-xl">
+                <form id="form-reset" class="space-y-5" novalidate>
+                    <input name="password" type="password" placeholder="Password baru (min. 8 karakter)" autocomplete="new-password" class="input-field w-full text-base text-slate-700 px-5 py-4 rounded-xl">
+                    <input name="password2" type="password" placeholder="Konfirmasi password baru" autocomplete="new-password" class="input-field w-full text-base text-slate-700 px-5 py-4 rounded-xl">
 
-                    <p id="msg-forgot" class="msg" hidden></p>
+                    <p id="msg-reset" class="msg" hidden></p>
 
-                    <!-- <button type="submit" class="btn-brand w-full text-white text-base font-bold tracking-wide py-4 rounded-xl shadow-md">
-                        KIRIM LINK RESET
-                    </button> -->
-                    <a href="repass.php" class="btn-brand block text-center w-full text-white text-base font-bold tracking-wide py-4 rounded-xl shadow-md">
-                        KIRIM LINK RESET
-                    </a>
+                    <button type="submit" class="btn-brand w-full text-white text-base font-bold tracking-wide py-4 rounded-xl shadow-md">
+                        SIMPAN PASSWORD
+                    </button>
                 </form>
 
                 <p class="text-center text-sm text-slate-500 mt-6">
-                    Ingat password kamu? <a href="login.php" class="font-semibold text-[#076653]">Kembali ke Sign In</a>
+                    Link kedaluwarsa? <a href="lupass.php" class="font-semibold text-[#076653]">Minta link baru</a>
                 </p>
             </section>
         </div>
@@ -246,20 +239,18 @@
             </svg>
 
             <div class="view relative z-10 flex flex-col items-center">
-                <h2 class="text-3xl font-extrabold text-[#0C342C] mb-4">Tenang, Relora`s!</h2>
+                <h2 class="text-3xl font-extrabold text-[#0C342C] mb-4">Hampir Selesai!</h2>
                 <p class="text-base text-[#0C342C]/80 leading-relaxed max-w-[320px]">
-                    Lupa password itu biasa. Reset lewat email, lalu kamu bisa lanjut belanja dan jualan bareng sesama mahasiswa.
+                    Pakai password yang kuat dan berbeda dari akun lain, lalu masuk lagi ke Relora.
                 </p>
-                <a href="login.php" class="mt-9 inline-block border-2 border-[#0C342C] text-[#0C342C] text-base font-bold tracking-wide px-10 py-3.5 rounded-xl hover:bg-[#0C342C] hover:text-white transition">
-                    SIGN IN
-                </a>
             </div>
         </div>
     </div>
 
     <script>
-        const form = document.getElementById('form-forgot');
-        const msg = document.getElementById('msg-forgot');
+        const form = document.getElementById('form-reset');
+        const msg = document.getElementById('msg-reset');
+        const token = new URLSearchParams(location.search).get('token');
 
         function message(text, type) {
             msg.textContent = text;
@@ -267,18 +258,49 @@
             msg.hidden = false;
         }
 
-        // form.addEventListener('submit', (e) => {
-        //     e.preventDefault();
-        //     const email = form.email.value.trim();
-        //     if (!email) {
-        //         return message('Isi email kamu dulu.', 'error');
-        //     }
-        //     if (!/^\S+@\S+\.\S+$/.test(email)) {
-        //         return message('Format email belum benar.', 'error');
-        //     }
-        //     message('Link reset sudah dikirim ke ' + email + '. Cek inbox atau folder spam.', 'ok');
-        // });
+        if (!token) {
+            message('Link tidak valid. Minta link reset baru lewat halaman Lupa Password.', 'error');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!token) return;
+
+            const password = form.password.value;
+            if (password.length < 8) {
+                return message('Password minimal 8 karakter.', 'error');
+            }
+            if (password !== form.password2.value) {
+                return message('Konfirmasi password tidak sama.', 'error');
+            }
+
+            const btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            try {
+                const res = await fetch('backend/reset.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        token,
+                        password
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    btn.disabled = false;
+                    return message(data.message || 'Gagal menyimpan password.', 'error');
+                }
+                message('Password berhasil diubah. Mengalihkan ke Sign In...', 'ok');
+                setTimeout(() => {
+                    location.href = 'signin.html';
+                }, 1500);
+            } catch (err) {
+                btn.disabled = false;
+                message('Gagal terhubung ke server. Coba lagi sebentar.', 'error');
+            }
+        });
     </script>
 </body>
-
 </html>
