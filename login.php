@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
- 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,8 +16,7 @@
         * { font-family: 'Poppins', sans-serif; }
         body { background: #F3F6F1; }
         [hidden] { display: none !important; }
- 
-        /* ---------- Latar ---------- */
+
         .scene { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
         .scene::before {
             content: ""; position: absolute; inset: -10%;
@@ -48,8 +46,7 @@
             50% { transform: translateY(-14px) rotate(var(--r, 0deg)); }
         }
         @media (max-width: 480px) { .float-icon { display: none; } }
- 
-        /* ---------- Komponen ---------- */
+
         .card-shadow { box-shadow: 0 30px 70px -20px rgba(12,52,44,.35); }
         .input-field { background: #EEF3FB; transition: box-shadow .2s; }
         .input-field:focus { outline: none; box-shadow: 0 0 0 3px rgba(7,102,83,.18); }
@@ -60,21 +57,14 @@
         .msg { font-size: .8rem; border-radius: .75rem; padding: .6rem .9rem; }
         .msg.error { background: #FDECEC; color: #B42318; }
         .msg.ok { background: #E2FBCE; color: #0C342C; }
- 
-        /*
-         * ANIMASI: satu variabel --p (0 = Sign In, 1 = Sign Up) diubah JS tiap frame.
-         * Semua elemen menghitung posisi & transparansinya dari --p,
-         * jadi selalu sinkron dan bisa berbalik arah mulus kalau diklik di tengah jalan.
-         */
+
         #card { --p: 0; isolation: isolate; transform: translateZ(0); }
- 
-        /* Layer yang tidak aktif (transparan) tidak boleh menutupi / menangkap klik */
+
         #card[data-mode="signin"] .pane-up,
         #card[data-mode="signin"] .promo-up,
         #card[data-mode="signup"] .pane-in,
         #card[data-mode="signup"] .promo-in { pointer-events: none; }
- 
-        /* Mobile: dua form saling geser + fade, tinggi ikut berubah halus */
+
         .stage {
             position: relative; overflow: hidden;
             height: calc((var(--h1, 600) * (1 - var(--p)) + var(--h2, 600) * var(--p)) * 1px);
@@ -83,8 +73,7 @@
         @media (min-width: 640px) { .pane { padding-inline: 4rem; } }
         .pane-in { opacity: clamp(0, calc((.6 - var(--p)) * 3), 1); transform: translateX(calc(var(--p) * -36px)); }
         .pane-up { opacity: clamp(0, calc((var(--p) - .4) * 3), 1); transform: translateX(calc((1 - var(--p)) * 36px)); }
- 
-        /* Desktop: panel hijau geser menutupi / membuka form */
+
         @media (min-width: 768px) {
             #card { min-height: 700px; }
             .stage { position: static; overflow: visible; height: auto; }
@@ -92,8 +81,6 @@
             .pane-up { left: 50%; }
             .pane-in { opacity: clamp(0, calc((.55 - var(--p)) * 5), 1); }
             .pane-up { opacity: clamp(0, calc((var(--p) - .45) * 4), 1); }
- 
-            /* Panel menyempit di tengah perjalanan (--s = sin(pi*p)), sisi dalamnya melengkung besar */
             .overlay {
                 position: absolute; top: 0; height: 100%;
                 width: calc(50% * (1 - .22 * var(--s, 0)));
@@ -103,7 +90,7 @@
                     calc(var(--rl, 0) * 1px) calc(var(--rr, 0) * 1px) calc(var(--rr, 0) * 1px) calc(var(--rl, 0) * 1px) /
                     calc(var(--rl, 0) * 1.25px) calc(var(--rr, 0) * 1.25px) calc(var(--rr, 0) * 1.25px) calc(var(--rl, 0) * 1.25px);
             }
-            /* Lebar isi promo dikunci setengah kartu supaya teks tidak berpindah baris saat panel menyempit */
+
             .promo {
                 position: absolute; top: 0; bottom: 0; left: 50%;
                 width: calc(var(--cw, 1100) * .5px); margin-left: calc(var(--cw, 1100) * -.25px);
@@ -331,5 +318,4 @@
         });
     </script>
 </body>
- 
 </html>
